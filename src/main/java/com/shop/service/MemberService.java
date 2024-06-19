@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor // final, @NonNull 변수에 붙으면 자동 주입(Autowired)을 해줍니다.
+@RequiredArgsConstructor // final, @NotNull 변수에 붙으면 자동 주입(Autowired)을 해줍니다.
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository; // 자동 주입됨
