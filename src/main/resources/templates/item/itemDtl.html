@@ -68,10 +68,10 @@
             var header = $("meta[name='_csrf_header']").attr("content");
 
             var url = "/cart";
-
+            // 객체 리트럴 키 : 값
             var paramData = {
-                itemId : $("#itemId").val(),
-                count : $("#count").val()
+                itemId : $("#itemId").val(), // #->id itemId 값
+                count : $("#count").val() // #->id count 값
             }
 
             var param = JSON.stringify(paramData);
