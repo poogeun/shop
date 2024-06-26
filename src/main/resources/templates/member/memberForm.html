@@ -20,6 +20,26 @@
                 alert(errorMessage);
                 }
                });
+
+        function sendNumber(){
+            var paramData = {
+                mail : $("#mail").val()
+            }
+
+            var param = JSON.stringify(paramData);
+
+            $.ajax({
+                url:"/mail",
+                type:"post",
+                contentType : "application/json",
+                data:param,
+                dataType:"json",
+                cache : false,
+                success: function(result, status){
+                    alert("인증번호 발송");
+                }
+            });
+        }
     </script>
 </th:block>
 
@@ -37,8 +57,14 @@
         </div>
         <div class="form-group">
             <label th:for="email">이메일 주소</label>
-            <input type="text" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요.">
+            <input type="text" th:field="*{email}" id="mail" class="form-control" placeholder="이메일을 입력해주세요.">
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect date</p>
+            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호 전송</button>
+        </div>
+        <div class="form-gruop">
+            <label th:for="emailCheck">인증번호 입력</label>
+            <input type="text" th:field="*{emailCheck}" id="check" class="form-control" placeholder="인증번호 입력">
+            <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">이메일 인증</button>
         </div>
         <div class="form-group">
             <label th:for="password">비밀번호</label>

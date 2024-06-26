@@ -18,6 +18,10 @@ public class MemberFormDto {
     @Email
     private String email;
 
+    @NotEmpty(message = "인증번호는 필수 입력 값입니다.")
+    @Email
+    private String emailCheck;
+
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
     @Length(min = 8, max = 16, message = "비밀번호는 8자이상, 16자 이하로 입력해주세요.")
     private String password;

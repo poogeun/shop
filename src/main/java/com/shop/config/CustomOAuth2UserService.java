@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-
+@Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private HttpSession httpSession;
+    private HttpSession httpSession; // 로그인 정보
 
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
+    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException { //oAuth2UserRequest 구글로그인 정보받음
         OAuth2UserService oAuth2UserService = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = oAuth2UserService.loadUser(oAuth2UserRequest);
 
@@ -50,7 +50,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
-                .orElse(attributes.toEntity());
+                .orElse(attributes.toEntity()); // user 객체가 없으면 toEntity() 새로만들기
         return userRepository.save(user);
     }
 }
